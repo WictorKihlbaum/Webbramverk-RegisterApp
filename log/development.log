@@ -3432,3 +3432,652 @@ Processing by UsersController#show as HTML
   Rendered layouts/_header.html.erb (1.1ms)
   Rendered layouts/_footer.html.erb (0.1ms)
 Completed 200 OK in 90ms (Views: 67.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-06-08 14:32:10 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StaticPagesController#home as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "appregistrations" WHERE "appregistrations"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered shared/_user_info.html.erb (3.0ms)
+  Rendered shared/_error_messages.html.erb (2.2ms)
+  Rendered shared/_appregistration_form.html.erb (9.7ms)
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "appregistrations" WHERE (user_id = 1)
+  [1m[36mAppregistration Load (0.1ms)[0m  [1mSELECT  "appregistrations".* FROM "appregistrations" WHERE (user_id = 1) LIMIT 30 OFFSET 0[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered appregistrations/_appregistration.html.erb (5.9ms)
+  Rendered shared/_feed.html.erb (9.5ms)
+  Rendered static_pages/home.html.erb within layouts/application (29.7ms)
+  Rendered layouts/_header.html.erb (8.1ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 445ms (Views: 391.8ms | ActiveRecord: 1.2ms)
+
+
+Started DELETE "/logout" for 127.0.0.1 at 2016-06-08 14:32:14 +0200
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"6HUWWp9W+F6I9MEHZVdInK1InHJ0e5JMadXJHR10DmFp0H3PGKyAaSwOfm9coDA4TtuPmLDHv/jWzwyYauR2pQ=="}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 3ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-06-08 14:32:14 +0200
+Processing by StaticPagesController#home as HTML
+  Rendered static_pages/home.html.erb within layouts/application (0.2ms)
+  Rendered layouts/_header.html.erb (0.3ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 69ms (Views: 65.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/v1/events" for 127.0.0.1 at 2016-06-08 14:32:58 +0200
+Processing by API::V1::EventsController#index as HTML
+  [1m[36mPosition Load (0.1ms)[0m  [1mSELECT positions.*, NULL AS distance, NULL AS bearing FROM "positions" WHERE (0)[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "events"
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT  "events".* FROM "events"  ORDER BY "events"."created_at" DESC LIMIT 15 OFFSET 0[0m
+[active_model_serializers]   [1m[35mCreator Load (0.1ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 2]]
+[active_model_serializers]   [1m[36mPosition Load (0.1ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mTag Load (0.2ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 4]]
+[active_model_serializers]   [1m[36mCreator Load (0.1ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mPosition Load (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 3]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 3]]
+[active_model_serializers]   [1m[35mCACHE (0.0ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mPosition Load (0.1ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 2]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 2]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mCACHE (0.0ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (53.67ms)
+Completed 500 Internal Server Error in 95ms (ActiveRecord: 2.2ms)
+
+NoMethodError (undefined method `api_v1_event_path' for #<EventSerializer:0x007fcf799c4758>):
+  app/serializers/event_serializer.rb:11:in `links'
+  app/controllers/api/api_controller.rb:48:in `block (2 levels) in render_response'
+  app/controllers/api/api_controller.rb:47:in `render_response'
+  app/controllers/api/v1/events_controller.rb:41:in `index'
+
+
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (9.9ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.2ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (65.5ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.2ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (352.9ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (412.3ms)
+
+
+Started GET "/api/v1/events.json" for 127.0.0.1 at 2016-06-08 14:33:17 +0200
+Processing by API::V1::EventsController#index as JSON
+  [1m[35mPosition Load (0.1ms)[0m  SELECT positions.*, NULL AS distance, NULL AS bearing FROM "positions" WHERE (0)
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "events"[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events"  ORDER BY "events"."created_at" DESC LIMIT 15 OFFSET 0
+[active_model_serializers]   [1m[36mCreator Load (0.1ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 2]]
+[active_model_serializers]   [1m[35mPosition Load (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 4]]
+[active_model_serializers]   [1m[35mCreator Load (0.1ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mPosition Load (0.0ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 3]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 3]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mPosition Load (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 2]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 2]]
+[active_model_serializers]   [1m[35mCACHE (0.0ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (13.37ms)
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 1.1ms)
+
+NoMethodError (undefined method `api_v1_event_path' for #<EventSerializer:0x007fcf76e16ca0>):
+  app/serializers/event_serializer.rb:11:in `links'
+  app/controllers/api/api_controller.rb:48:in `block (2 levels) in render_response'
+  app/controllers/api/api_controller.rb:47:in `render_response'
+  app/controllers/api/v1/events_controller.rb:41:in `index'
+
+
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.8ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.2ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (62.2ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (46.9ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (104.4ms)
+
+
+Started GET "/api/v1/events" for 127.0.0.1 at 2016-06-08 14:33:21 +0200
+Processing by API::V1::EventsController#index as HTML
+  [1m[36mPosition Load (0.1ms)[0m  [1mSELECT positions.*, NULL AS distance, NULL AS bearing FROM "positions" WHERE (0)[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "events"
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT  "events".* FROM "events"  ORDER BY "events"."created_at" DESC LIMIT 15 OFFSET 0[0m
+[active_model_serializers]   [1m[35mCreator Load (0.1ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 2]]
+[active_model_serializers]   [1m[36mPosition Load (0.1ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 4]]
+[active_model_serializers]   [1m[36mCreator Load (0.1ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mPosition Load (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 3]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 3]]
+[active_model_serializers]   [1m[35mCACHE (0.0ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mPosition Load (0.1ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 2]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 2]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mCACHE (0.0ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (12.98ms)
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 0.9ms)
+
+NoMethodError (undefined method `api_v1_event_path' for #<EventSerializer:0x007fcf7175a8f8>):
+  app/serializers/event_serializer.rb:11:in `links'
+  app/controllers/api/api_controller.rb:48:in `block (2 levels) in render_response'
+  app/controllers/api/api_controller.rb:47:in `render_response'
+  app/controllers/api/v1/events_controller.rb:41:in `index'
+
+
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (9.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.1ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (62.8ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (46.9ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (103.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-06-08 14:33:43 +0200
+Processing by StaticPagesController#home as HTML
+  Rendered static_pages/home.html.erb within layouts/application (0.2ms)
+  Rendered layouts/_header.html.erb (0.3ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 62ms (Views: 61.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/v1/events" for 127.0.0.1 at 2016-06-08 14:35:33 +0200
+Processing by API::V1::EventsController#index as HTML
+  [1m[35mPosition Load (0.2ms)[0m  SELECT positions.*, NULL AS distance, NULL AS bearing FROM "positions" WHERE (0)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "events"[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events"  ORDER BY "events"."created_at" DESC LIMIT 15 OFFSET 0
+[active_model_serializers]   [1m[36mCreator Load (0.1ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 2]]
+[active_model_serializers]   [1m[35mPosition Load (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 4]]
+[active_model_serializers]   [1m[35mCreator Load (0.2ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mPosition Load (0.1ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 3]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 3]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mPosition Load (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 2]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 2]]
+[active_model_serializers]   [1m[35mCACHE (0.0ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (17.6ms)
+Completed 500 Internal Server Error in 22ms (ActiveRecord: 1.4ms)
+
+NoMethodError (undefined method `api_v1_event_path' for #<EventSerializer:0x007fcf7c829a58>):
+  app/serializers/event_serializer.rb:11:in `links'
+  app/controllers/api/api_controller.rb:48:in `block (2 levels) in render_response'
+  app/controllers/api/api_controller.rb:47:in `render_response'
+  app/controllers/api/v1/events_controller.rb:41:in `index'
+
+
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (10.2ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.5ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (67.8ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.6ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (49.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (112.5ms)
+
+
+Started GET "/api/v1/events" for 127.0.0.1 at 2016-06-08 14:35:51 +0200
+Processing by API::V1::EventsController#index as HTML
+  [1m[36mPosition Load (0.2ms)[0m  [1mSELECT positions.*, NULL AS distance, NULL AS bearing FROM "positions" WHERE (0)[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "events"
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT  "events".* FROM "events"  ORDER BY "events"."created_at" DESC LIMIT 15 OFFSET 0[0m
+[active_model_serializers]   [1m[35mCreator Load (0.1ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 2]]
+[active_model_serializers]   [1m[36mPosition Load (0.1ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 4]]
+[active_model_serializers]   [1m[36mCreator Load (0.1ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mPosition Load (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 3]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 3]]
+[active_model_serializers]   [1m[35mCACHE (0.0ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mPosition Load (0.1ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 2]]
+[active_model_serializers]   [1m[35mTag Load (0.2ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 2]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mCACHE (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (28.34ms)
+Completed 500 Internal Server Error in 33ms (ActiveRecord: 2.0ms)
+
+NoMethodError (undefined method `api_v1_event_path' for #<EventSerializer:0x007fcf71e27e10>):
+  app/serializers/event_serializer.rb:11:in `links'
+  app/controllers/api/api_controller.rb:48:in `block (2 levels) in render_response'
+  app/controllers/api/api_controller.rb:47:in `render_response'
+  app/controllers/api/v1/events_controller.rb:41:in `index'
+
+
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (10.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.1ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (67.0ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.7ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (50.7ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (116.1ms)
+
+
+Started GET "/api/v1/events" for 127.0.0.1 at 2016-06-08 14:35:56 +0200
+Processing by API::V1::EventsController#index as HTML
+  [1m[35mPosition Load (0.1ms)[0m  SELECT positions.*, NULL AS distance, NULL AS bearing FROM "positions" WHERE (0)
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "events"[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events"  ORDER BY "events"."created_at" DESC LIMIT 15 OFFSET 0
+[active_model_serializers]   [1m[36mCreator Load (0.1ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 2]]
+[active_model_serializers]   [1m[35mPosition Load (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 4]]
+[active_model_serializers]   [1m[35mCreator Load (0.1ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mPosition Load (0.1ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 3]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 3]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mPosition Load (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 2]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 2]]
+[active_model_serializers]   [1m[35mCACHE (0.0ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (13.78ms)
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 1.1ms)
+
+NoMethodError (undefined method `api_v1_event_path' for #<EventSerializer:0x007fcf794659b0>):
+  app/serializers/event_serializer.rb:11:in `links'
+  app/controllers/api/api_controller.rb:48:in `block (2 levels) in render_response'
+  app/controllers/api/api_controller.rb:47:in `render_response'
+  app/controllers/api/v1/events_controller.rb:41:in `index'
+
+
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.9ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (63.0ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (48.5ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (106.9ms)
+
+
+Started GET "/api/v1/event" for 127.0.0.1 at 2016-06-08 14:36:58 +0200
+
+ActionController::RoutingError (No route matches [GET] "/api/v1/event"):
+  actionpack (4.2.5) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  rack-cors (0.4.0) lib/rack/cors.rb:80:in `call'
+  railties (4.2.5) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5) lib/rails/application.rb:165:in `call'
+  rack-cors (0.4.0) lib/rack/cors.rb:80:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/Wictor/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /Users/Wictor/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /Users/Wictor/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_route.html.erb (4.7ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.1ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.2ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (99.8ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (46.0ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (106.3ms)
+
+
+Started GET "/api/v1/events" for 127.0.0.1 at 2016-06-08 14:37:01 +0200
+Processing by API::V1::EventsController#index as HTML
+  [1m[36mPosition Load (0.1ms)[0m  [1mSELECT positions.*, NULL AS distance, NULL AS bearing FROM "positions" WHERE (0)[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "events"
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT  "events".* FROM "events"  ORDER BY "events"."created_at" DESC LIMIT 15 OFFSET 0[0m
+[active_model_serializers]   [1m[35mCreator Load (0.1ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 2]]
+[active_model_serializers]   [1m[36mPosition Load (0.1ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 4]]
+[active_model_serializers]   [1m[36mCreator Load (0.1ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mPosition Load (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 3]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 3]]
+[active_model_serializers]   [1m[35mCACHE (0.0ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mPosition Load (0.1ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 2]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 2]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mCACHE (0.0ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (13.42ms)
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 1.0ms)
+
+NoMethodError (undefined method `api_v1_event_path' for #<EventSerializer:0x007fcf7a9d3720>):
+  app/serializers/event_serializer.rb:11:in `links'
+  app/controllers/api/api_controller.rb:48:in `block (2 levels) in render_response'
+  app/controllers/api/api_controller.rb:47:in `render_response'
+  app/controllers/api/v1/events_controller.rb:41:in `index'
+
+
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (15.7ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.2ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (69.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (47.0ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (104.8ms)
+
+
+Started GET "/api/v1/event" for 127.0.0.1 at 2016-06-08 14:37:20 +0200
+
+ActionController::RoutingError (No route matches [GET] "/api/v1/event"):
+  actionpack (4.2.5) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  rack-cors (0.4.0) lib/rack/cors.rb:80:in `call'
+  railties (4.2.5) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5) lib/rails/application.rb:165:in `call'
+  rack-cors (0.4.0) lib/rack/cors.rb:80:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/Wictor/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /Users/Wictor/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /Users/Wictor/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_route.html.erb (4.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.1ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.2ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (98.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (49.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (106.9ms)
+
+
+Started GET "/api/v1/events" for 127.0.0.1 at 2016-06-08 14:37:23 +0200
+Processing by API::V1::EventsController#index as HTML
+  [1m[35mPosition Load (0.1ms)[0m  SELECT positions.*, NULL AS distance, NULL AS bearing FROM "positions" WHERE (0)
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "events"[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events"  ORDER BY "events"."created_at" DESC LIMIT 15 OFFSET 0
+[active_model_serializers]   [1m[36mCreator Load (0.1ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 2]]
+[active_model_serializers]   [1m[35mPosition Load (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 4]]
+[active_model_serializers]   [1m[35mCreator Load (0.1ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mPosition Load (0.1ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 3]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 3]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mPosition Load (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 2]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 2]]
+[active_model_serializers]   [1m[35mCACHE (0.0ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (16.6ms)
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 1.0ms)
+
+NoMethodError (undefined method `api_v1_event_path' for #<EventSerializer:0x007fcf7c840398>):
+  app/serializers/event_serializer.rb:11:in `links'
+  app/controllers/api/api_controller.rb:48:in `block (2 levels) in render_response'
+  app/controllers/api/api_controller.rb:47:in `render_response'
+  app/controllers/api/v1/events_controller.rb:41:in `index'
+
+
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (9.5ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.5ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (63.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (47.9ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (106.4ms)
+
+
+Started GET "/api/v1/events" for 127.0.0.1 at 2016-06-08 14:37:23 +0200
+Processing by API::V1::EventsController#index as HTML
+  [1m[36mPosition Load (0.1ms)[0m  [1mSELECT positions.*, NULL AS distance, NULL AS bearing FROM "positions" WHERE (0)[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "events"
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT  "events".* FROM "events"  ORDER BY "events"."created_at" DESC LIMIT 15 OFFSET 0[0m
+[active_model_serializers]   [1m[35mCreator Load (0.1ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 2]]
+[active_model_serializers]   [1m[36mPosition Load (0.1ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 4]]
+[active_model_serializers]   [1m[36mCreator Load (0.1ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mPosition Load (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 3]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 3]]
+[active_model_serializers]   [1m[35mCACHE (0.0ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mPosition Load (0.1ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 2]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 2]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mCACHE (0.0ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (13.78ms)
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 1.1ms)
+
+NoMethodError (undefined method `api_v1_event_path' for #<EventSerializer:0x007fcf7a9d0070>):
+  app/serializers/event_serializer.rb:11:in `links'
+  app/controllers/api/api_controller.rb:48:in `block (2 levels) in render_response'
+  app/controllers/api/api_controller.rb:47:in `render_response'
+  app/controllers/api/v1/events_controller.rb:41:in `index'
+
+
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.0ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.9ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (59.2ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (47.5ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (104.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-06-08 14:55:40 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StaticPagesController#home as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "appregistrations" WHERE "appregistrations"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered shared/_user_info.html.erb (2.9ms)
+  Rendered shared/_error_messages.html.erb (2.0ms)
+  Rendered shared/_appregistration_form.html.erb (9.0ms)
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "appregistrations" WHERE (user_id = 1)
+  [1m[36mAppregistration Load (0.2ms)[0m  [1mSELECT  "appregistrations".* FROM "appregistrations" WHERE (user_id = 1) LIMIT 30 OFFSET 0[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered appregistrations/_appregistration.html.erb (5.6ms)
+  Rendered shared/_feed.html.erb (9.3ms)
+  Rendered static_pages/home.html.erb within layouts/application (28.6ms)
+  Rendered layouts/_header.html.erb (2.4ms)
+  Rendered layouts/_footer.html.erb (7.7ms)
+Completed 200 OK in 416ms (Views: 362.6ms | ActiveRecord: 1.3ms)
+
+
+Started DELETE "/logout" for 127.0.0.1 at 2016-06-08 14:55:45 +0200
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"n777Ys0mEu7jMR0h0MnkrN3ECbdtUV1hL4+NOQCF7s4eG5D3Stxq2UfLoknpPpwIPlcaXantcNWQlUi8dxWWCg=="}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 3ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-06-08 14:55:45 +0200
+Processing by StaticPagesController#home as HTML
+  Rendered static_pages/home.html.erb within layouts/application (0.2ms)
+  Rendered layouts/_header.html.erb (0.3ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 76ms (Views: 71.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/v1/events" for 127.0.0.1 at 2016-06-08 14:55:49 +0200
+Processing by API::V1::EventsController#index as HTML
+  [1m[36mPosition Load (0.1ms)[0m  [1mSELECT positions.*, NULL AS distance, NULL AS bearing FROM "positions" WHERE (0)[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "events"
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT  "events".* FROM "events"  ORDER BY "events"."created_at" DESC LIMIT 15 OFFSET 0[0m
+[active_model_serializers]   [1m[35mCreator Load (0.1ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 2]]
+[active_model_serializers]   [1m[36mPosition Load (0.1ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mTag Load (0.2ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 4]]
+[active_model_serializers]   [1m[36mCreator Load (0.1ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mPosition Load (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 3]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 3]]
+[active_model_serializers]   [1m[35mCACHE (0.0ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mPosition Load (0.1ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 2]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 2]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mCACHE (0.0ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (53.73ms)
+Completed 500 Internal Server Error in 95ms (ActiveRecord: 2.3ms)
+
+NoMethodError (undefined method `api_v1_event_path' for #<EventSerializer:0x007f899a27bd68>):
+  app/serializers/event_serializer.rb:11:in `links'
+  app/controllers/api/api_controller.rb:48:in `block (2 levels) in render_response'
+  app/controllers/api/api_controller.rb:47:in `render_response'
+  app/controllers/api/v1/events_controller.rb:41:in `index'
+
+
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (9.9ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (68.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (367.8ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (429.6ms)
+
+
+Started GET "/api/v1/events" for 127.0.0.1 at 2016-06-08 14:55:50 +0200
+Processing by API::V1::EventsController#index as HTML
+  [1m[35mPosition Load (0.1ms)[0m  SELECT positions.*, NULL AS distance, NULL AS bearing FROM "positions" WHERE (0)
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "events"[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events"  ORDER BY "events"."created_at" DESC LIMIT 15 OFFSET 0
+[active_model_serializers]   [1m[36mCreator Load (0.1ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 2]]
+[active_model_serializers]   [1m[35mPosition Load (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 4]]
+[active_model_serializers]   [1m[35mCreator Load (0.1ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mPosition Load (0.1ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 3]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 3]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mPosition Load (0.2ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 2]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 2]]
+[active_model_serializers]   [1m[35mCACHE (0.0ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (15.98ms)
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 1.1ms)
+
+NoMethodError (undefined method `api_v1_event_path' for #<EventSerializer:0x007f899ac462d0>):
+  app/serializers/event_serializer.rb:11:in `links'
+  app/controllers/api/api_controller.rb:48:in `block (2 levels) in render_response'
+  app/controllers/api/api_controller.rb:47:in `render_response'
+  app/controllers/api/v1/events_controller.rb:41:in `index'
+
+
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.7ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (61.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (45.3ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Wictor/.rvm/gems/ruby-2.3.1/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (103.8ms)
