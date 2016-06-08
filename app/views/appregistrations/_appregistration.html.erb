@@ -1,0 +1,26 @@
+<li id="appregistration-<%= appregistration.id %>">
+
+  <span class="user">
+    <span class="bold-text">Owner: </span>
+      <%= appregistration.user.name %>
+  </span>
+
+  <span class="content">
+    <span class="bold-text">App:</span>
+    <%= appregistration.content %>
+  </span>
+
+  <span class="apikey">
+    <span class="bold-text">API-Key:</span>
+    <%= appregistration.apikey %>
+  </span>
+
+  <span class="timestamp">
+    <% if current_user.admin? || current_user?(appregistration.user) %>
+      <%= link_to "Delete", appregistration, method: :delete,
+                  data: { confirm: 'You are about to delete "' +
+                      appregistration.content + '", are you sure?' } %>
+    <% end %>
+  </span>
+
+</li>
