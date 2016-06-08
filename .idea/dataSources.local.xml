@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails Webbramverk-RegisterApp: development" uuid="b9ecdb54-ad42-4ea9-b5a1-7ac4b8d1ebd6">
+      <auth-required>false</auth-required>
+    </data-source>
+    <data-source name="Rails Webbramverk-RegisterApp: test" uuid="121836ea-3958-4325-80ac-805f15d9591d">
+      <auth-required>false</auth-required>
+    </data-source>
+  </component>
+</project>
