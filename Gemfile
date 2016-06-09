@@ -60,6 +60,10 @@ group :development do
   gem 'spring'
 end
 
+gem 'pg'
+gem 'rails_12factor'
+gem 'puma'
+
 # Gems for production (Heroku)
 group :production do
   gem 'pg'
