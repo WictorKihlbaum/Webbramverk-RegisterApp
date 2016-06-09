@@ -61,16 +61,18 @@ I have written down the essentials step-by-step from the guide above.
 2. Open the terminal on your computer.   
 3. Navigate to the extracted folder in your terminal.   
 4. Type "bundle install --without production"  
-5. Run the application by either:
+5. Run the application by one of these options:
    * Start RubyMine. Press Run > Run 'Development: RegisterApp'.  
    * Open terminal and type: `rails s`.  
-5. Open your webbrowser and type "localhost:portnumber" (example: localhost:3000) in the address bar.   
+6. Open your web browser and type "localhost:portnumber" (example: localhost:3000) in the address bar.   
 
 Done! Start using the application locally.
 
 
 ### Reset database.
-1. rake db:drop
-2. rake db:create
-3. rake db:migrate
-4. rake db:seed
+Open the terminal and navigate to the application folder. Type in what it says below step by step.
+
+1. `rake db:drop`
+2. `rake db:create`
+3. `rake db:migrate`
+4. `rake db:seed`
