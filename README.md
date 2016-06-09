@@ -62,7 +62,7 @@ I have written down the essentials step-by-step from the guide above.
 **1.** Download the Zip-file and extract it.  
 **2.** Open the terminal on your computer.   
 **3.** Navigate to the extracted folder in your terminal.   
-**4.** Type "bundle install --without production"  
+**4.** Type `bundle install --without production`  
 **5.** Run the application by one of these options:    
 --**5A.** Start RubyMine. Press Run > Run 'Development: RegisterApp'.     
 --**5B.** Open terminal and type: `rails s`.     
