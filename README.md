@@ -22,38 +22,38 @@ I have written down the essentials step-by-step from the guide above.
 
 `$` Is included in the terminal by default.
 
-1. Upgrade your Mac to OS X El Capitan (El Capitan can be downloaded from AppStore).
+**1.** Upgrade your Mac to OS X El Capitan (El Capitan can be downloaded from AppStore).
 
-2. Install XCode (XCode can be downloaded from AppStore).
+**2.** Install XCode (XCode can be downloaded from AppStore).
 
-3. Install Homebrew by open terminal and type:  
+**3.** Install Homebrew by open terminal and type:  
  `$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)”`
 
-4. Install GPG. In terminal type:  
+**4.** Install GPG. In terminal type:  
 `$ brew install gpg`
 
-5. Install the security key for RVM. In terminal type:  
+**5.** Install the security key for RVM. In terminal type:  
 `$ command curl -sSL https://rvm.io/mpapis.asc | gpg --import -`
 
-6. Install RVM. In terminal type:  
+**6.** Install RVM. In terminal type:  
 `$ \curl -L https://get.rvm.io | bash -s stable`
 
-7. Close and reopen the Terminal, or type:  
+**7.** Close and reopen the Terminal, or type:  
 `$ source ~/.rvm/scripts/rvm`
 
-8. Install Ruby. In terminal type:  
+**8.** Install Ruby. In terminal type:  
 `$ rvm install ruby-2.3.1`
 
-9. Update gems. In terminal type:  
+**9.** Update gems. In terminal type:  
 `$ gem update`
 
-10. Install Bundler. In terminal type:  
+**10.** Install Bundler. In terminal type:  
 `$ gem install bundler`
 
-11. Install Nokogiri. In terminal type:  
+**11.** Install Nokogiri. In terminal type:  
 `$ gem install nokogiri`
 
-12. Install Rails. In terminal type:   
+**12.** Install Rails. In terminal type:   
 `$ gem install rails`
 
 **Application installation**  
@@ -66,13 +66,13 @@ I have written down the essentials step-by-step from the guide above.
 --**5B.** Open terminal and type: `rails s`.     
 **6.** Open your web browser and type "localhost:portnumber" (example: localhost:3000) in the address bar.   
 
-Done! Start using the application locally.
+**Done! Start using the application locally.**
 
 
-### Reset database.
+### Reset database
 Open the terminal and navigate to the application folder. Type in what it says below step by step.
 
-1. `rake db:drop`
-2. `rake db:create`
-3. `rake db:migrate`
-4. `rake db:seed`
+**1.** `rake db:drop`
+**2.** `rake db:create`
+**3.** `rake db:migrate`
+**4.** `rake db:seed`
