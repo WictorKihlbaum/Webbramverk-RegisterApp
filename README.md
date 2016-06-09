@@ -21,7 +21,9 @@ I have written down the essentials step-by-step from the guide above.
 **Prepare your Mac**
 
 1. Upgrade your Mac to OS X El Capitan (Can be found on AppStore).
+
 2. Install XCode (Can be found on AppStore).
+
 3. Install Homebrew by open terminal and type:  
  `$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)”`
 4. Install GPG. In terminal type:  
