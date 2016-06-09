@@ -72,7 +72,7 @@ I have written down the essentials step-by-step from the guide above.
 ### Reset database
 Open the terminal and navigate to the application folder. Type in what it says below step by step.
 
-**1.** `rake db:drop`
-**2.** `rake db:create`
-**3.** `rake db:migrate`
-**4.** `rake db:seed`
+**1.** `rake db:drop`   
+**2.** `rake db:create`    
+**3.** `rake db:migrate`    
+**4.** `rake db:seed`    
