@@ -20,6 +20,8 @@ I have written down the essentials step-by-step from the guide above.
 
 **Prepare your Mac**
 
+`$` Is included by default.
+
 1. Upgrade your Mac to OS X El Capitan (El Capitan can be downloaded from AppStore).
 
 2. Install XCode (XCode can be downloaded from AppStore).
@@ -54,11 +56,18 @@ I have written down the essentials step-by-step from the guide above.
 12. Install Rails. In terminal type:   
 `$ gem install rails`
 
-**Application installation**
-1. Download the Zip-file and extract it.
-2. Open the terminal on your computer. 
-3. Navigate to the extracted folder in your terminal.
-4. Type "bundle install --without production"
-5. Open your webbrowser and type "localhost:portnumber" (example: localhost:3000) in the address bar.
+**Application installation**  
+1. Download the Zip-file and extract it.  
+2. Open the terminal on your computer.   
+3. Navigate to the extracted folder in your terminal.   
+4. Type "bundle install --without production"   
+5. Open your webbrowser and type "localhost:portnumber" (example: localhost:3000) in the address bar.   
 
 Done! Start using the application locally.
+
+
+### Reset database.
+1. rake db:drop
+2. rake db:create
+3. rake db:migrate
+4. rake db:seed
