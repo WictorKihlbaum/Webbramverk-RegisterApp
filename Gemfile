@@ -60,6 +60,8 @@ group :development do
   gem 'spring'
 end
 
+# I had to add these gems outside production because Heroku didn't install them.
+# If you want to run this application locally remove/comment the gems below.
 gem 'pg'
 gem 'rails_12factor'
 gem 'puma'
