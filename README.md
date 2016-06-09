@@ -9,8 +9,8 @@ This is an application in which developers can register their accounts and then 
 <p>
 The application database has been seeded with 26 different users and 10 registered applications for each user. One of these users is an Admin. To be able to login as admin please use these credentials:
 </p>
-* **Email**: admin@user.com
-* **Password**: Password
+**Email**: admin@user.com   
+**Password**: Password   
 
 
 This application has been developed on a Mac in JetBrains RubyMine IDE.
@@ -20,7 +20,7 @@ I have written down the essentials step-by-step from the guide above.
 
 **Prepare your Mac**
 
-`$` Is included by default.
+`$` Is included in the terminal by default.
 
 1. Upgrade your Mac to OS X El Capitan (El Capitan can be downloaded from AppStore).
 
@@ -62,8 +62,8 @@ I have written down the essentials step-by-step from the guide above.
 3. Navigate to the extracted folder in your terminal.   
 4. Type "bundle install --without production"  
 5. Run the application by one of these options:
-   * Start RubyMine. Press Run > Run 'Development: RegisterApp'.  
-   * Open terminal and type: `rails s`.  
+* Start RubyMine. Press Run > Run 'Development: RegisterApp'.  
+* Open terminal and type: `rails s`.  
 6. Open your web browser and type "localhost:portnumber" (example: localhost:3000) in the address bar.   
 
 Done! Start using the application locally.
