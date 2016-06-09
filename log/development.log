@@ -7006,3 +7006,1091 @@ Migrating to CreateEventsTags (20160429105352)
             FROM sqlite_temp_master
             WHERE name='index_events_tags_on_event_id' AND type='index'
 
+  [1m[36m (3.2ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.9ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateUsers (20160122145737)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "password_digest" varchar, "remember_digest" varchar, "admin" boolean, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160122145737"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to AddIndexToUsersEmail (20160122150158)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160122150158"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAppregistrations (20160122154739)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "appregistrations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar, "apikey" varchar, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_appregistrations_on_user_id" ON "appregistrations" ("user_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160122154739"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to CreateEvents (20160321193919)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "category" varchar, "description" varchar, "creator_id" integer, "position_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_events_on_creator_id" ON "events" ("creator_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_events_on_creator_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_events_on_creator_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_events_on_position_id" ON "events" ("position_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160321193919"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateTags (20160321194443)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160321194443"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateCreators (20160321194510)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "creators" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "password_digest" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160321194510"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePositions (20160321194631)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "positions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "address" varchar, "latitude" float, "longitude" float, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160321194631"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateEventsTags (20160429105352)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "events_tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "event_id" integer, "tag_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_events_tags_on_event_id" ON "events_tags" ("event_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_events_tags_on_event_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_events_tags_on_event_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_events_tags_on_tag_id" ON "events_tags" ("tag_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160429105352"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_appregistrations_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_appregistrations_on_user_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_events_on_position_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_events_on_position_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_events_on_creator_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_events_on_creator_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_events_tags_on_tag_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_events_tags_on_tag_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_events_tags_on_event_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_events_tags_on_event_id' AND type='index'
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('admin@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "admin", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Admin"], ["email", "admin@user.com"], ["password_digest", "$2a$10$DOwWJ9wephGGBGjm9q35VeNB6npmFnte0U3NuEKOQ0LuNvW7JJeJG"], ["admin", "t"], ["created_at", "2016-06-09 10:43:49.172587"], ["updated_at", "2016-06-09 10:43:49.172587"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('wk222as@student.lnu.se') LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Wictor"], ["email", "wk222as@student.lnu.se"], ["password_digest", "$2a$10$9jvks7QK2NLPl6E/XZnzbu2i8CCd6Jyma06dJjAQEp3U.GqFwY2A."], ["created_at", "2016-06-09 10:43:49.242729"], ["updated_at", "2016-06-09 10:43:49.242729"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-1@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Dasia Willms"], ["email", "example-1@user.com"], ["password_digest", "$2a$10$NxnmPZLeiMRc78BDyRgHYuY3sq/9ZR6AVkdBZ.4cRg19pdq5DpE2C"], ["created_at", "2016-06-09 10:43:49.651157"], ["updated_at", "2016-06-09 10:43:49.651157"]]
+  [1m[36m (2.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-2@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Mr. Renee Skiles"], ["email", "example-2@user.com"], ["password_digest", "$2a$10$Beq7FAIkt.BompB8z0ZhHOTDIGAcVkMMpSlELbUDsv3CdSCrX0pfG"], ["created_at", "2016-06-09 10:43:49.723500"], ["updated_at", "2016-06-09 10:43:49.723500"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-3@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Clint Stark II"], ["email", "example-3@user.com"], ["password_digest", "$2a$10$DpIlLhE/TYFv4s1oczRlYutkZ47Fv8nfU/uZkYx99AR3Ca6H27S66"], ["created_at", "2016-06-09 10:43:49.798738"], ["updated_at", "2016-06-09 10:43:49.798738"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-4@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Mercedes Altenwerth Jr."], ["email", "example-4@user.com"], ["password_digest", "$2a$10$mXJzu4MPVue3B/Qq4NTHqepFvVcaDrLoua5eEsPr2ZICzL2vA/oKi"], ["created_at", "2016-06-09 10:43:49.874226"], ["updated_at", "2016-06-09 10:43:49.874226"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-5@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Candice Wolff"], ["email", "example-5@user.com"], ["password_digest", "$2a$10$FbK7oMhtXndstqa2H8Kr.Olbs8enB/IQL/cmzHiWm58FRIfy08382"], ["created_at", "2016-06-09 10:43:49.949866"], ["updated_at", "2016-06-09 10:43:49.949866"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-6@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Colten Rau"], ["email", "example-6@user.com"], ["password_digest", "$2a$10$AhB8bOYWZb/6sTqM.5pNPeAikCZtwdMs2zKQu4a2JmnqZneEOb.Xm"], ["created_at", "2016-06-09 10:43:50.029924"], ["updated_at", "2016-06-09 10:43:50.029924"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-7@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Janie Dickens"], ["email", "example-7@user.com"], ["password_digest", "$2a$10$JBkNzHOVQjxwHdJ4J9Xguu6rFb86exRWWiFKU8FrXHPa4zp5grgHe"], ["created_at", "2016-06-09 10:43:50.099180"], ["updated_at", "2016-06-09 10:43:50.099180"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-8@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Dallas Feeney PhD"], ["email", "example-8@user.com"], ["password_digest", "$2a$10$TxgDi4/anVVKDjgeuf5b4.sR5Y1j0IJmXvUt9p4v0EpDokjimrmZ2"], ["created_at", "2016-06-09 10:43:50.171511"], ["updated_at", "2016-06-09 10:43:50.171511"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-9@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Kayla Rogahn"], ["email", "example-9@user.com"], ["password_digest", "$2a$10$Dr1AzkTCJV/DuHD5P6LzJO/pR6fS/tP3nhNtFRBZ9sdaYlJX.EjD6"], ["created_at", "2016-06-09 10:43:50.252607"], ["updated_at", "2016-06-09 10:43:50.252607"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-10@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Selina Friesen"], ["email", "example-10@user.com"], ["password_digest", "$2a$10$H/fXY5IDXyziePVfH1cX7uYY14RXsuVpHEkBD/2Rv4KHdIjdgVU6a"], ["created_at", "2016-06-09 10:43:50.329037"], ["updated_at", "2016-06-09 10:43:50.329037"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-11@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Florine Smith"], ["email", "example-11@user.com"], ["password_digest", "$2a$10$DoYydkAJbX5pFKpe8qIkfel6H6vZi7SvIJo5L0HEDTQvwMXlrxBFS"], ["created_at", "2016-06-09 10:43:50.406643"], ["updated_at", "2016-06-09 10:43:50.406643"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-12@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Francesca Lueilwitz"], ["email", "example-12@user.com"], ["password_digest", "$2a$10$o7.8PtgOnig9UA5kjYjVMehDmHnwni7tXUciiZgjSNJNqIHyJrnCa"], ["created_at", "2016-06-09 10:43:50.481127"], ["updated_at", "2016-06-09 10:43:50.481127"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-13@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Margie Reynolds"], ["email", "example-13@user.com"], ["password_digest", "$2a$10$HHUmoykF/hZBzLDOV0ZLWOmR/IclX0mMhyT82oNtQpE6yvP8WhY6C"], ["created_at", "2016-06-09 10:43:50.553892"], ["updated_at", "2016-06-09 10:43:50.553892"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-14@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Crystel Reinger"], ["email", "example-14@user.com"], ["password_digest", "$2a$10$hYOnHSuKCQGvFFK452Irze5khYJLdKeJeeTmmQOa0ZyYU27oaVqXK"], ["created_at", "2016-06-09 10:43:50.628321"], ["updated_at", "2016-06-09 10:43:50.628321"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-15@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Mateo Zboncak III"], ["email", "example-15@user.com"], ["password_digest", "$2a$10$EtbFy2NUn7YsslWn1oEBbehTketzGoaa.9DOTJtZMpRNKgiwTjT3."], ["created_at", "2016-06-09 10:43:50.706931"], ["updated_at", "2016-06-09 10:43:50.706931"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-16@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Josefa Anderson"], ["email", "example-16@user.com"], ["password_digest", "$2a$10$BovPsClX.yG3.6FXdW.PNuHM4DdqXDqOtVGvAeg170YTOaatTAMhu"], ["created_at", "2016-06-09 10:43:50.782403"], ["updated_at", "2016-06-09 10:43:50.782403"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-17@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Mrs. Breana Ruecker"], ["email", "example-17@user.com"], ["password_digest", "$2a$10$55z0GQThU5aomDpLftjbmuxFz9Xj9THpq5wR34fhGmEngP2T33VU6"], ["created_at", "2016-06-09 10:43:50.859406"], ["updated_at", "2016-06-09 10:43:50.859406"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-18@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Cecil Vandervort PhD"], ["email", "example-18@user.com"], ["password_digest", "$2a$10$eKHdyCozl776FEYl0AAzpO2GdBQ/mGrCCK4ITavruXynAUziwO3wS"], ["created_at", "2016-06-09 10:43:50.936775"], ["updated_at", "2016-06-09 10:43:50.936775"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-19@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Edward McKenzie"], ["email", "example-19@user.com"], ["password_digest", "$2a$10$A9Ptm/LjpiYQMsCg4uZJiOJpj8mjDFVroeyhDEnOaS7OEDEHByjeG"], ["created_at", "2016-06-09 10:43:51.016976"], ["updated_at", "2016-06-09 10:43:51.016976"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-20@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Loyce Sipes"], ["email", "example-20@user.com"], ["password_digest", "$2a$10$Boha3i6VQY3Y6c4jHVRoRu4upBIvAXAYF.io34fhIDEQrO/DOVeoi"], ["created_at", "2016-06-09 10:43:51.085992"], ["updated_at", "2016-06-09 10:43:51.085992"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-21@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Taurean Goodwin"], ["email", "example-21@user.com"], ["password_digest", "$2a$10$qfBkZkMScdV52jDfvL8Xo.OIO20OD.dWPTlWaoJxq7HVSt2Pi880q"], ["created_at", "2016-06-09 10:43:51.159496"], ["updated_at", "2016-06-09 10:43:51.159496"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-22@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Pasquale Considine"], ["email", "example-22@user.com"], ["password_digest", "$2a$10$mWZNNM334dotXTcAmMShfeNuohxfHlN6ae0pRcw9UNmVGSQksWAIy"], ["created_at", "2016-06-09 10:43:51.232011"], ["updated_at", "2016-06-09 10:43:51.232011"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-23@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Josiah Brown"], ["email", "example-23@user.com"], ["password_digest", "$2a$10$/ibE9bJLiJhGgEPG/6aUZOxBcEaIyuyer7h/QXCzqVbSnDMzsuA7i"], ["created_at", "2016-06-09 10:43:51.306213"], ["updated_at", "2016-06-09 10:43:51.306213"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('example-24@user.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Stanley Goyette V"], ["email", "example-24@user.com"], ["password_digest", "$2a$10$TRowUNGiEDKm69BzRhPXTO/C4bobCXnGnOFdr5ZfNJMB9PJsznKbS"], ["created_at", "2016-06-09 10:43:51.379104"], ["updated_at", "2016-06-09 10:43:51.379104"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 1], ["created_at", "2016-06-09 10:43:51.391559"], ["updated_at", "2016-06-09 10:43:51.391559"], ["apikey", "1018cdb0585e4c96830e71341e527b5c"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 1], ["created_at", "2016-06-09 10:43:51.393914"], ["updated_at", "2016-06-09 10:43:51.393914"], ["apikey", "99433b6f8d148eb9c08faf970e328236"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 1], ["created_at", "2016-06-09 10:43:51.395981"], ["updated_at", "2016-06-09 10:43:51.395981"], ["apikey", "edd8fccbdaa182cc860a32912c7ed4e8"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 1], ["created_at", "2016-06-09 10:43:51.398047"], ["updated_at", "2016-06-09 10:43:51.398047"], ["apikey", "7990b065cef164adbafc5f56f8404e28"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 1], ["created_at", "2016-06-09 10:43:51.399974"], ["updated_at", "2016-06-09 10:43:51.399974"], ["apikey", "f6ff32f84826319012cadb41242954b0"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 1], ["created_at", "2016-06-09 10:43:51.401908"], ["updated_at", "2016-06-09 10:43:51.401908"], ["apikey", "1adcbbe5a8949933ef86b7d4fa52cb8a"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 1], ["created_at", "2016-06-09 10:43:51.403886"], ["updated_at", "2016-06-09 10:43:51.403886"], ["apikey", "4b81ca4bb11e3e38b2ad4e3b23fb7f48"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 1], ["created_at", "2016-06-09 10:43:51.405968"], ["updated_at", "2016-06-09 10:43:51.405968"], ["apikey", "7967209186a7e70ec436cd976ae1dc31"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 1], ["created_at", "2016-06-09 10:43:51.407892"], ["updated_at", "2016-06-09 10:43:51.407892"], ["apikey", "98cbcef298f037e687c8925f5398b3c7"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 1], ["created_at", "2016-06-09 10:43:51.409867"], ["updated_at", "2016-06-09 10:43:51.409867"], ["apikey", "b3f59d57a567391b5161f663031eadd0"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 2], ["created_at", "2016-06-09 10:43:51.411838"], ["updated_at", "2016-06-09 10:43:51.411838"], ["apikey", "78613e7ecdd84911b58a2611553c4168"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 2], ["created_at", "2016-06-09 10:43:51.414031"], ["updated_at", "2016-06-09 10:43:51.414031"], ["apikey", "4186bf534c3d1b6b8569aaafc2e108ca"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 2], ["created_at", "2016-06-09 10:43:51.416168"], ["updated_at", "2016-06-09 10:43:51.416168"], ["apikey", "18417d8ea8ef94979e40407f17d56321"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 2], ["created_at", "2016-06-09 10:43:51.418106"], ["updated_at", "2016-06-09 10:43:51.418106"], ["apikey", "c8c0780ca50ffddab463a042cd6ac50f"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 2], ["created_at", "2016-06-09 10:43:51.420047"], ["updated_at", "2016-06-09 10:43:51.420047"], ["apikey", "154c710055c62d8b55cf24102a48c063"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 2], ["created_at", "2016-06-09 10:43:51.422019"], ["updated_at", "2016-06-09 10:43:51.422019"], ["apikey", "264e1acb268839ae8e6032baf318236d"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 2], ["created_at", "2016-06-09 10:43:51.424174"], ["updated_at", "2016-06-09 10:43:51.424174"], ["apikey", "3157d5cce41d3ce986aeec218f3c532b"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 2], ["created_at", "2016-06-09 10:43:51.426138"], ["updated_at", "2016-06-09 10:43:51.426138"], ["apikey", "28595e55d8ae0c57a99f73debd952621"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 2], ["created_at", "2016-06-09 10:43:51.428189"], ["updated_at", "2016-06-09 10:43:51.428189"], ["apikey", "43a0164c9ff0bfc317f89336317f6544"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 2], ["created_at", "2016-06-09 10:43:51.430133"], ["updated_at", "2016-06-09 10:43:51.430133"], ["apikey", "1d4027318ed195a29d78ea90ed98f95a"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 3], ["created_at", "2016-06-09 10:43:51.432087"], ["updated_at", "2016-06-09 10:43:51.432087"], ["apikey", "06606ad33efbaa9bb550dca5d914ca45"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 3], ["created_at", "2016-06-09 10:43:51.434048"], ["updated_at", "2016-06-09 10:43:51.434048"], ["apikey", "5cf9b76734cd085b449dd2adbfd78361"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 3], ["created_at", "2016-06-09 10:43:51.436114"], ["updated_at", "2016-06-09 10:43:51.436114"], ["apikey", "3b713def1e051940f2bceb9036bb8952"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 3], ["created_at", "2016-06-09 10:43:51.438231"], ["updated_at", "2016-06-09 10:43:51.438231"], ["apikey", "d2bb27e2acd1155f136b52d89d9f680e"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 3], ["created_at", "2016-06-09 10:43:51.440158"], ["updated_at", "2016-06-09 10:43:51.440158"], ["apikey", "560946ff042a109dedc61b47d4383615"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 3], ["created_at", "2016-06-09 10:43:51.442092"], ["updated_at", "2016-06-09 10:43:51.442092"], ["apikey", "672e490c005a53d5e745b3de0ea665e4"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 3], ["created_at", "2016-06-09 10:43:51.444026"], ["updated_at", "2016-06-09 10:43:51.444026"], ["apikey", "81ff0d4fdfeffb63f4ca279572fed115"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 3], ["created_at", "2016-06-09 10:43:51.446091"], ["updated_at", "2016-06-09 10:43:51.446091"], ["apikey", "becac1242a4ce3e8eff5522adbf62364"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 3], ["created_at", "2016-06-09 10:43:51.448086"], ["updated_at", "2016-06-09 10:43:51.448086"], ["apikey", "2ff9f86463e70564f2aa97c4e145f460"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 3], ["created_at", "2016-06-09 10:43:51.450093"], ["updated_at", "2016-06-09 10:43:51.450093"], ["apikey", "b12b8c1c14c6845f76f1cbc3e43430d3"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 4], ["created_at", "2016-06-09 10:43:51.452031"], ["updated_at", "2016-06-09 10:43:51.452031"], ["apikey", "d7c4f73549ac5dc0fedae497acbba694"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 4], ["created_at", "2016-06-09 10:43:51.454019"], ["updated_at", "2016-06-09 10:43:51.454019"], ["apikey", "9538c85c7d097fe55b40c4228c7b4ecb"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 4], ["created_at", "2016-06-09 10:43:51.455918"], ["updated_at", "2016-06-09 10:43:51.455918"], ["apikey", "5690a5f458e4996d3433b11eda3406ac"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 4], ["created_at", "2016-06-09 10:43:51.457979"], ["updated_at", "2016-06-09 10:43:51.457979"], ["apikey", "f2daac986fa73a67a97aa22fedccb7bf"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 4], ["created_at", "2016-06-09 10:43:51.460095"], ["updated_at", "2016-06-09 10:43:51.460095"], ["apikey", "e865141bc1340e671afa0cf4579e9361"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 4], ["created_at", "2016-06-09 10:43:51.462075"], ["updated_at", "2016-06-09 10:43:51.462075"], ["apikey", "b1ba1ace0029bfb971669df2087d3127"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 4], ["created_at", "2016-06-09 10:43:51.464024"], ["updated_at", "2016-06-09 10:43:51.464024"], ["apikey", "01b991963ef3ddb31445f56299d4040e"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 4], ["created_at", "2016-06-09 10:43:51.465930"], ["updated_at", "2016-06-09 10:43:51.465930"], ["apikey", "155fa11236e608ce0b66d347e09be61f"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 4], ["created_at", "2016-06-09 10:43:51.467819"], ["updated_at", "2016-06-09 10:43:51.467819"], ["apikey", "3a75cc3e1b0acff3c394b03d5bc9a16a"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 4], ["created_at", "2016-06-09 10:43:51.470006"], ["updated_at", "2016-06-09 10:43:51.470006"], ["apikey", "ba224ca6c2a248583072ad2d5934daf4"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 5], ["created_at", "2016-06-09 10:43:51.472188"], ["updated_at", "2016-06-09 10:43:51.472188"], ["apikey", "2580b1f25f9517263e6e1195ee19a40b"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 5], ["created_at", "2016-06-09 10:43:51.474258"], ["updated_at", "2016-06-09 10:43:51.474258"], ["apikey", "99e5948b980eac7d05491602f8523d74"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 5], ["created_at", "2016-06-09 10:43:51.476240"], ["updated_at", "2016-06-09 10:43:51.476240"], ["apikey", "11a050780e3fdb0ec9e8bfb3ce06c23e"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 5], ["created_at", "2016-06-09 10:43:51.478197"], ["updated_at", "2016-06-09 10:43:51.478197"], ["apikey", "6b0dcc73c5da2542479e58198ea073ef"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 5], ["created_at", "2016-06-09 10:43:51.480158"], ["updated_at", "2016-06-09 10:43:51.480158"], ["apikey", "f54453d0f264692c137518ee046eb3b4"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 5], ["created_at", "2016-06-09 10:43:51.482002"], ["updated_at", "2016-06-09 10:43:51.482002"], ["apikey", "3e82e6281eb06d7bf99aa02ddc9393e4"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 5], ["created_at", "2016-06-09 10:43:51.484053"], ["updated_at", "2016-06-09 10:43:51.484053"], ["apikey", "7b97136f37859a8490f93cccd2f82afc"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 5], ["created_at", "2016-06-09 10:43:51.486044"], ["updated_at", "2016-06-09 10:43:51.486044"], ["apikey", "739f1fa7a95b9a6e276c987d72482a9a"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 5], ["created_at", "2016-06-09 10:43:51.487979"], ["updated_at", "2016-06-09 10:43:51.487979"], ["apikey", "837cb8c4885cae58e3fb1135e65343ba"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 5], ["created_at", "2016-06-09 10:43:51.490016"], ["updated_at", "2016-06-09 10:43:51.490016"], ["apikey", "001f566a1a02d81a59d1dade62f7e6d7"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 6], ["created_at", "2016-06-09 10:43:51.491993"], ["updated_at", "2016-06-09 10:43:51.491993"], ["apikey", "b86020e4c30b57b63536bd5db21504b5"]]
+  [1m[36m (3.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 6], ["created_at", "2016-06-09 10:43:51.496759"], ["updated_at", "2016-06-09 10:43:51.496759"], ["apikey", "bff6d65c7705564a9b4e69c0b1df3188"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 6], ["created_at", "2016-06-09 10:43:51.499087"], ["updated_at", "2016-06-09 10:43:51.499087"], ["apikey", "e82e837cfda2f5d3ccec5334e390bbc9"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 6], ["created_at", "2016-06-09 10:43:51.501034"], ["updated_at", "2016-06-09 10:43:51.501034"], ["apikey", "6f4121671d0692406d5762e1a0910816"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 6], ["created_at", "2016-06-09 10:43:51.503014"], ["updated_at", "2016-06-09 10:43:51.503014"], ["apikey", "1a523c580881a286ae4dc0e148ea9e11"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 6], ["created_at", "2016-06-09 10:43:51.505034"], ["updated_at", "2016-06-09 10:43:51.505034"], ["apikey", "2a6e4072d3db77ac47300d09fc4b668d"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 6], ["created_at", "2016-06-09 10:43:51.507091"], ["updated_at", "2016-06-09 10:43:51.507091"], ["apikey", "b3b730942d76958eb9d64f1c03997763"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 6], ["created_at", "2016-06-09 10:43:51.509005"], ["updated_at", "2016-06-09 10:43:51.509005"], ["apikey", "130839b7d8b6ae1726d56b7a6d475bff"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 6], ["created_at", "2016-06-09 10:43:51.510939"], ["updated_at", "2016-06-09 10:43:51.510939"], ["apikey", "bad051a29bf6299b413405a2ddfbd324"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 6], ["created_at", "2016-06-09 10:43:51.512917"], ["updated_at", "2016-06-09 10:43:51.512917"], ["apikey", "e118d6d3ab7a13c161bc7d1a663cc872"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 7], ["created_at", "2016-06-09 10:43:51.514983"], ["updated_at", "2016-06-09 10:43:51.514983"], ["apikey", "14eefdef7cb422ae9d88b913572abaaf"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 7], ["created_at", "2016-06-09 10:43:51.517222"], ["updated_at", "2016-06-09 10:43:51.517222"], ["apikey", "af3d5c004466dfce5f9db57a516aed25"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 7], ["created_at", "2016-06-09 10:43:51.519189"], ["updated_at", "2016-06-09 10:43:51.519189"], ["apikey", "963fcf290935a66fa947d415a47161d1"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 7], ["created_at", "2016-06-09 10:43:51.521238"], ["updated_at", "2016-06-09 10:43:51.521238"], ["apikey", "08337fadbc3a0249eeee5344a3b20e50"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 7], ["created_at", "2016-06-09 10:43:51.523234"], ["updated_at", "2016-06-09 10:43:51.523234"], ["apikey", "7e5d3afab32a20a13097b08709a7a584"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 7], ["created_at", "2016-06-09 10:43:51.525241"], ["updated_at", "2016-06-09 10:43:51.525241"], ["apikey", "921ed46d69f5478a66ce1fcd0236f2d2"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 7], ["created_at", "2016-06-09 10:43:51.527323"], ["updated_at", "2016-06-09 10:43:51.527323"], ["apikey", "d9dfdaa1d8198ddefc982c2cf5a76de7"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 7], ["created_at", "2016-06-09 10:43:51.529273"], ["updated_at", "2016-06-09 10:43:51.529273"], ["apikey", "a417f514c674e87c3f5aca4c1e574023"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 7], ["created_at", "2016-06-09 10:43:51.531325"], ["updated_at", "2016-06-09 10:43:51.531325"], ["apikey", "673fb959a574444d84ddb85cfb562cad"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 7], ["created_at", "2016-06-09 10:43:51.533231"], ["updated_at", "2016-06-09 10:43:51.533231"], ["apikey", "0335b42fd146485835c6cf036b355107"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 8], ["created_at", "2016-06-09 10:43:51.535257"], ["updated_at", "2016-06-09 10:43:51.535257"], ["apikey", "ee7403317f078126d11bdca4fd5f59d9"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 8], ["created_at", "2016-06-09 10:43:51.537445"], ["updated_at", "2016-06-09 10:43:51.537445"], ["apikey", "7c6c83f8b1a02fc0e7b3507b9a54e41e"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 8], ["created_at", "2016-06-09 10:43:51.539398"], ["updated_at", "2016-06-09 10:43:51.539398"], ["apikey", "9fc56c30ede31b49c4a3d0ba539df532"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 8], ["created_at", "2016-06-09 10:43:51.541263"], ["updated_at", "2016-06-09 10:43:51.541263"], ["apikey", "e4837f986baad45a6b05fafa53cde919"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 8], ["created_at", "2016-06-09 10:43:51.543246"], ["updated_at", "2016-06-09 10:43:51.543246"], ["apikey", "19b3cb2dd70e225ae488ed245803d8b4"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 8], ["created_at", "2016-06-09 10:43:51.545139"], ["updated_at", "2016-06-09 10:43:51.545139"], ["apikey", "26af84b63340ded8d65141477ed13410"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 8], ["created_at", "2016-06-09 10:43:51.547127"], ["updated_at", "2016-06-09 10:43:51.547127"], ["apikey", "3c8162c5c7fe94672816cda839f4419d"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 8], ["created_at", "2016-06-09 10:43:51.549175"], ["updated_at", "2016-06-09 10:43:51.549175"], ["apikey", "eb81ad28e966beb364a15d8f830b694d"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 8], ["created_at", "2016-06-09 10:43:51.551242"], ["updated_at", "2016-06-09 10:43:51.551242"], ["apikey", "aa3deb1e61f93b9ba56ac43811b6219a"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 8], ["created_at", "2016-06-09 10:43:51.553168"], ["updated_at", "2016-06-09 10:43:51.553168"], ["apikey", "c9b9f877001bd85a69f5b111d047f1e8"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 9], ["created_at", "2016-06-09 10:43:51.555152"], ["updated_at", "2016-06-09 10:43:51.555152"], ["apikey", "e8944cefdf50fe8e73d4880510840d72"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 9], ["created_at", "2016-06-09 10:43:51.557233"], ["updated_at", "2016-06-09 10:43:51.557233"], ["apikey", "1753413ea61a10cf4da216c79eaa9c4e"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 9], ["created_at", "2016-06-09 10:43:51.559385"], ["updated_at", "2016-06-09 10:43:51.559385"], ["apikey", "d2acfc81d20a87d15f44c5436da613b0"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 9], ["created_at", "2016-06-09 10:43:51.561407"], ["updated_at", "2016-06-09 10:43:51.561407"], ["apikey", "e9209c5beb1ae1220683a51c053f5beb"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 9], ["created_at", "2016-06-09 10:43:51.563374"], ["updated_at", "2016-06-09 10:43:51.563374"], ["apikey", "903a6696fd6700278bb7fde4bf418e27"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 9], ["created_at", "2016-06-09 10:43:51.565347"], ["updated_at", "2016-06-09 10:43:51.565347"], ["apikey", "dd6df64cf1fe220d870524c8d3499d80"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 9], ["created_at", "2016-06-09 10:43:51.567471"], ["updated_at", "2016-06-09 10:43:51.567471"], ["apikey", "478e46996a89d9697b4a112f55beaab6"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 9], ["created_at", "2016-06-09 10:43:51.569497"], ["updated_at", "2016-06-09 10:43:51.569497"], ["apikey", "ce2f11c165ae7fb8fc2922132ff8de16"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 9], ["created_at", "2016-06-09 10:43:51.571432"], ["updated_at", "2016-06-09 10:43:51.571432"], ["apikey", "40180004c8be4542982753977b84a2f8"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 9], ["created_at", "2016-06-09 10:43:51.573498"], ["updated_at", "2016-06-09 10:43:51.573498"], ["apikey", "517b3c6a53448f53fb01b2d83bfd4539"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 10], ["created_at", "2016-06-09 10:43:51.575463"], ["updated_at", "2016-06-09 10:43:51.575463"], ["apikey", "289e88c1d5cebe4b51194a8acc8a1910"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 10], ["created_at", "2016-06-09 10:43:51.577575"], ["updated_at", "2016-06-09 10:43:51.577575"], ["apikey", "38daf1939e2e528c9a7838402ac6a360"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 10], ["created_at", "2016-06-09 10:43:51.579673"], ["updated_at", "2016-06-09 10:43:51.579673"], ["apikey", "04519796a897dae55b6ab505c3b2d1ee"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 10], ["created_at", "2016-06-09 10:43:51.581877"], ["updated_at", "2016-06-09 10:43:51.581877"], ["apikey", "5e4c130f534b83ee2de1dd71a56402b1"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 10], ["created_at", "2016-06-09 10:43:51.583788"], ["updated_at", "2016-06-09 10:43:51.583788"], ["apikey", "d8672c19b868f803d828d191ff871f7d"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 10], ["created_at", "2016-06-09 10:43:51.585814"], ["updated_at", "2016-06-09 10:43:51.585814"], ["apikey", "23a5b682b1684dd1c3213bd131a4e826"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 10], ["created_at", "2016-06-09 10:43:51.587820"], ["updated_at", "2016-06-09 10:43:51.587820"], ["apikey", "44e1c2749606f3c4a4b5aefee7059b11"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 10], ["created_at", "2016-06-09 10:43:51.589944"], ["updated_at", "2016-06-09 10:43:51.589944"], ["apikey", "50c965059a11a22f53efe8e7b11bf094"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 10], ["created_at", "2016-06-09 10:43:51.591952"], ["updated_at", "2016-06-09 10:43:51.591952"], ["apikey", "abb4daa33c0c225d4052eb33bae4ab1c"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 10], ["created_at", "2016-06-09 10:43:51.593939"], ["updated_at", "2016-06-09 10:43:51.593939"], ["apikey", "b038b743b444bad14b267309882b4461"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 11], ["created_at", "2016-06-09 10:43:51.595971"], ["updated_at", "2016-06-09 10:43:51.595971"], ["apikey", "9670118e6f8e26eea7871edaaf0d16c8"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 11], ["created_at", "2016-06-09 10:43:51.598048"], ["updated_at", "2016-06-09 10:43:51.598048"], ["apikey", "29e8ebd34b53083859e973fc5139d28a"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 11], ["created_at", "2016-06-09 10:43:51.600079"], ["updated_at", "2016-06-09 10:43:51.600079"], ["apikey", "d5bacd756086f65b4bea594d7f9a3e64"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 11], ["created_at", "2016-06-09 10:43:51.602117"], ["updated_at", "2016-06-09 10:43:51.602117"], ["apikey", "876a9ed6b29e9d9e6dbb61c68b54eef4"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 11], ["created_at", "2016-06-09 10:43:51.604145"], ["updated_at", "2016-06-09 10:43:51.604145"], ["apikey", "b9fc7f8ecc6552e32485e37fbd274aa7"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 11], ["created_at", "2016-06-09 10:43:51.606098"], ["updated_at", "2016-06-09 10:43:51.606098"], ["apikey", "72d671cf29d96733e6e0f26921ac0c4d"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 11], ["created_at", "2016-06-09 10:43:51.608066"], ["updated_at", "2016-06-09 10:43:51.608066"], ["apikey", "dd9c82f85670c5f37cea69818a31fff5"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 11], ["created_at", "2016-06-09 10:43:51.610026"], ["updated_at", "2016-06-09 10:43:51.610026"], ["apikey", "5906efa6ab06ca97be175cb35d5db19d"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 11], ["created_at", "2016-06-09 10:43:51.611938"], ["updated_at", "2016-06-09 10:43:51.611938"], ["apikey", "2f644c6df1d8d535e340b67fd49f35c4"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 11], ["created_at", "2016-06-09 10:43:51.613939"], ["updated_at", "2016-06-09 10:43:51.613939"], ["apikey", "a750c7ebce0311d2f2a6d6e297e5217f"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 12], ["created_at", "2016-06-09 10:43:51.615992"], ["updated_at", "2016-06-09 10:43:51.615992"], ["apikey", "767b618fca13cf10e2721e328db11826"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 12], ["created_at", "2016-06-09 10:43:51.618227"], ["updated_at", "2016-06-09 10:43:51.618227"], ["apikey", "eed28cdcc2486c7dc5a4ccfdcd01a4c8"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 12], ["created_at", "2016-06-09 10:43:51.620275"], ["updated_at", "2016-06-09 10:43:51.620275"], ["apikey", "b05565bf9f6b246ea717d3ec5df652b2"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 12], ["created_at", "2016-06-09 10:43:51.622306"], ["updated_at", "2016-06-09 10:43:51.622306"], ["apikey", "8cf4a154de5fd23db68b45e8ba75ee98"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 12], ["created_at", "2016-06-09 10:43:51.624654"], ["updated_at", "2016-06-09 10:43:51.624654"], ["apikey", "f28e430f956d887f7d13ec344b6d0e57"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 12], ["created_at", "2016-06-09 10:43:51.627183"], ["updated_at", "2016-06-09 10:43:51.627183"], ["apikey", "8cb12f218a236b05386e0cde6538541c"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 12], ["created_at", "2016-06-09 10:43:51.629496"], ["updated_at", "2016-06-09 10:43:51.629496"], ["apikey", "90249ac929798decd3822177444a2624"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 12], ["created_at", "2016-06-09 10:43:51.631562"], ["updated_at", "2016-06-09 10:43:51.631562"], ["apikey", "3b85ed5b7d06d66ca3e821c2f933162a"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 12], ["created_at", "2016-06-09 10:43:51.633528"], ["updated_at", "2016-06-09 10:43:51.633528"], ["apikey", "655f1c06b7d9106c03e87b94d41925b1"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 12], ["created_at", "2016-06-09 10:43:51.635511"], ["updated_at", "2016-06-09 10:43:51.635511"], ["apikey", "ac1d1404e56798236d097e0c03a820bc"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 13], ["created_at", "2016-06-09 10:43:51.637419"], ["updated_at", "2016-06-09 10:43:51.637419"], ["apikey", "30424d73a3097261f8cf0bd4b535c503"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 13], ["created_at", "2016-06-09 10:43:51.639406"], ["updated_at", "2016-06-09 10:43:51.639406"], ["apikey", "6e78dc165ffd89c0058ef9a8817a50f8"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 13], ["created_at", "2016-06-09 10:43:51.641484"], ["updated_at", "2016-06-09 10:43:51.641484"], ["apikey", "3b9fa83134b60766f5835d82681edad5"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 13], ["created_at", "2016-06-09 10:43:51.643432"], ["updated_at", "2016-06-09 10:43:51.643432"], ["apikey", "8517ad4d2033f708cc0560ebda8bdee4"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 13], ["created_at", "2016-06-09 10:43:51.645457"], ["updated_at", "2016-06-09 10:43:51.645457"], ["apikey", "6a05206fe17f35974fa9b09807677b8b"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 13], ["created_at", "2016-06-09 10:43:51.647452"], ["updated_at", "2016-06-09 10:43:51.647452"], ["apikey", "64e2eb86daab4c8714f3273a4c301e2d"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 13], ["created_at", "2016-06-09 10:43:51.649471"], ["updated_at", "2016-06-09 10:43:51.649471"], ["apikey", "a3b9c8c89428c3251e531af72267e483"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 13], ["created_at", "2016-06-09 10:43:51.651726"], ["updated_at", "2016-06-09 10:43:51.651726"], ["apikey", "a0e0e7506ef10386b6f0d7b3404a71f9"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 13], ["created_at", "2016-06-09 10:43:51.653793"], ["updated_at", "2016-06-09 10:43:51.653793"], ["apikey", "61befed7adb03ac66f914cf9d422d702"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 13], ["created_at", "2016-06-09 10:43:51.655756"], ["updated_at", "2016-06-09 10:43:51.655756"], ["apikey", "79ffce82b5565413fb6f69437f927d97"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 14], ["created_at", "2016-06-09 10:43:51.657766"], ["updated_at", "2016-06-09 10:43:51.657766"], ["apikey", "14704728116cac9f9e9d82188e95e007"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 14], ["created_at", "2016-06-09 10:43:51.659745"], ["updated_at", "2016-06-09 10:43:51.659745"], ["apikey", "743358ffb4ca2dc454beb0ae5400db09"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 14], ["created_at", "2016-06-09 10:43:51.662045"], ["updated_at", "2016-06-09 10:43:51.662045"], ["apikey", "21e023f2668f6d88f734e6cf611e291f"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 14], ["created_at", "2016-06-09 10:43:51.664155"], ["updated_at", "2016-06-09 10:43:51.664155"], ["apikey", "7ffed45a41ec82e3cba7dcfe03fc4add"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 14], ["created_at", "2016-06-09 10:43:51.666210"], ["updated_at", "2016-06-09 10:43:51.666210"], ["apikey", "41b91f0748774aebcbdab7aa4ae67891"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 14], ["created_at", "2016-06-09 10:43:51.668207"], ["updated_at", "2016-06-09 10:43:51.668207"], ["apikey", "bbf6c66e4c3aab8717e077650ee6ae75"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 14], ["created_at", "2016-06-09 10:43:51.670158"], ["updated_at", "2016-06-09 10:43:51.670158"], ["apikey", "b9992b49f91171ed4de9acc757f964f9"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 14], ["created_at", "2016-06-09 10:43:51.672273"], ["updated_at", "2016-06-09 10:43:51.672273"], ["apikey", "edf72441244186bcae8f88008a84e02d"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 14], ["created_at", "2016-06-09 10:43:51.674336"], ["updated_at", "2016-06-09 10:43:51.674336"], ["apikey", "8f1b53e670c32ed551dfdfe192bd6bb4"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 14], ["created_at", "2016-06-09 10:43:51.676229"], ["updated_at", "2016-06-09 10:43:51.676229"], ["apikey", "6ab375afd9fcdb91bec36e56b9e14489"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 15], ["created_at", "2016-06-09 10:43:51.678259"], ["updated_at", "2016-06-09 10:43:51.678259"], ["apikey", "5e2cab6fd60fc22b3b99d269937764e8"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 15], ["created_at", "2016-06-09 10:43:51.680253"], ["updated_at", "2016-06-09 10:43:51.680253"], ["apikey", "e7433d4feab9948a303d1af657bf626b"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 15], ["created_at", "2016-06-09 10:43:51.682421"], ["updated_at", "2016-06-09 10:43:51.682421"], ["apikey", "9fa7604f56a1ac9614f07972716aef9e"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 15], ["created_at", "2016-06-09 10:43:51.684496"], ["updated_at", "2016-06-09 10:43:51.684496"], ["apikey", "67d8ba40ab105a24bbfa3848630a81f5"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 15], ["created_at", "2016-06-09 10:43:51.686681"], ["updated_at", "2016-06-09 10:43:51.686681"], ["apikey", "1eec2d9e8f81e30b0ad33c78cb89b3f6"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 15], ["created_at", "2016-06-09 10:43:51.688589"], ["updated_at", "2016-06-09 10:43:51.688589"], ["apikey", "9e3809513ed6004771bc26870eac019f"]]
+  [1m[35m (3.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 15], ["created_at", "2016-06-09 10:43:51.693975"], ["updated_at", "2016-06-09 10:43:51.693975"], ["apikey", "01a7cae698b4e613b950888dff5c7270"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 15], ["created_at", "2016-06-09 10:43:51.696287"], ["updated_at", "2016-06-09 10:43:51.696287"], ["apikey", "4a3e826bc67ed710f1da0a17603fb137"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 15], ["created_at", "2016-06-09 10:43:51.698243"], ["updated_at", "2016-06-09 10:43:51.698243"], ["apikey", "d220bee8d2a1f200e546733ee49fb271"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 15], ["created_at", "2016-06-09 10:43:51.700623"], ["updated_at", "2016-06-09 10:43:51.700623"], ["apikey", "ebd2a2b2b91c80e514e2a44c92fc5f73"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 16], ["created_at", "2016-06-09 10:43:51.703154"], ["updated_at", "2016-06-09 10:43:51.703154"], ["apikey", "0621746137faf27bf7f9167d750217e0"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 16], ["created_at", "2016-06-09 10:43:51.705505"], ["updated_at", "2016-06-09 10:43:51.705505"], ["apikey", "5633f6bc98b20cd0f7a903ababdb9cd7"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 16], ["created_at", "2016-06-09 10:43:51.707537"], ["updated_at", "2016-06-09 10:43:51.707537"], ["apikey", "55cc16ff0160f1449523239aa4418fc7"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 16], ["created_at", "2016-06-09 10:43:51.709598"], ["updated_at", "2016-06-09 10:43:51.709598"], ["apikey", "6ae16d75d39807a6ce4d49cac3a92ab0"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 16], ["created_at", "2016-06-09 10:43:51.711522"], ["updated_at", "2016-06-09 10:43:51.711522"], ["apikey", "66320abd979626190bc9f72410aa3f22"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 16], ["created_at", "2016-06-09 10:43:51.713457"], ["updated_at", "2016-06-09 10:43:51.713457"], ["apikey", "851e1c1ea15175bd2ae00957c3b47d6e"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 16], ["created_at", "2016-06-09 10:43:51.715623"], ["updated_at", "2016-06-09 10:43:51.715623"], ["apikey", "c2d49d274462f41b9467e581234cb789"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 16], ["created_at", "2016-06-09 10:43:51.717703"], ["updated_at", "2016-06-09 10:43:51.717703"], ["apikey", "6dc56df1c40bb30b2fe90223aa76ef0e"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 16], ["created_at", "2016-06-09 10:43:51.719681"], ["updated_at", "2016-06-09 10:43:51.719681"], ["apikey", "70e889e9a427558b4dd7fbced3ccbbe0"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 16], ["created_at", "2016-06-09 10:43:51.721645"], ["updated_at", "2016-06-09 10:43:51.721645"], ["apikey", "8e2a7c9191e54a7cc2e5ce4424194270"]]
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 17], ["created_at", "2016-06-09 10:43:51.724300"], ["updated_at", "2016-06-09 10:43:51.724300"], ["apikey", "446a6f4054a6acb008ee4de6c25af4ce"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 17], ["created_at", "2016-06-09 10:43:51.726419"], ["updated_at", "2016-06-09 10:43:51.726419"], ["apikey", "4238ba1a51642ccef0706aa496d1b33a"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 17], ["created_at", "2016-06-09 10:43:51.728491"], ["updated_at", "2016-06-09 10:43:51.728491"], ["apikey", "8c8308c8694bf43c72f92a01e80bfa7c"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 17], ["created_at", "2016-06-09 10:43:51.730492"], ["updated_at", "2016-06-09 10:43:51.730492"], ["apikey", "2ffec42d3c20ab2e9c654e8e2165956f"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 17], ["created_at", "2016-06-09 10:43:51.732485"], ["updated_at", "2016-06-09 10:43:51.732485"], ["apikey", "fb21f976240c67bfc92451c07f1500fb"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 17], ["created_at", "2016-06-09 10:43:51.734403"], ["updated_at", "2016-06-09 10:43:51.734403"], ["apikey", "21be7462f2eaad48c38442d534bdebac"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 17], ["created_at", "2016-06-09 10:43:51.736460"], ["updated_at", "2016-06-09 10:43:51.736460"], ["apikey", "3b63c8542cd8e7047c565763b256ec1d"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 17], ["created_at", "2016-06-09 10:43:51.738562"], ["updated_at", "2016-06-09 10:43:51.738562"], ["apikey", "6e5cdcee3a1d9ea22f054108c92ccd0d"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 17], ["created_at", "2016-06-09 10:43:51.740589"], ["updated_at", "2016-06-09 10:43:51.740589"], ["apikey", "00bd171d3d4065f3426fa7adecaaa2cf"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 17], ["created_at", "2016-06-09 10:43:51.742595"], ["updated_at", "2016-06-09 10:43:51.742595"], ["apikey", "86897f8ac4bb73078d4299ef62f706b2"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 18], ["created_at", "2016-06-09 10:43:51.744536"], ["updated_at", "2016-06-09 10:43:51.744536"], ["apikey", "b0e37d6c8d6338a5b241d71cc302c001"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 18], ["created_at", "2016-06-09 10:43:51.746557"], ["updated_at", "2016-06-09 10:43:51.746557"], ["apikey", "ec447af3e524b1f70bc94931e6d02f44"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 18], ["created_at", "2016-06-09 10:43:51.748766"], ["updated_at", "2016-06-09 10:43:51.748766"], ["apikey", "271cf020e251944dc95ab109b70648b1"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 18], ["created_at", "2016-06-09 10:43:51.750849"], ["updated_at", "2016-06-09 10:43:51.750849"], ["apikey", "3f5c1513ccb84ca05983a3189360fd06"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 18], ["created_at", "2016-06-09 10:43:51.752869"], ["updated_at", "2016-06-09 10:43:51.752869"], ["apikey", "e486b02ad44fc8fe633f7d61fb240d1c"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 18], ["created_at", "2016-06-09 10:43:51.754782"], ["updated_at", "2016-06-09 10:43:51.754782"], ["apikey", "282fdc622d72b4f30738a2adbbcbd3c0"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 18], ["created_at", "2016-06-09 10:43:51.756773"], ["updated_at", "2016-06-09 10:43:51.756773"], ["apikey", "26e294a5ca2ff077a7980b2ab18309b4"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 18], ["created_at", "2016-06-09 10:43:51.758857"], ["updated_at", "2016-06-09 10:43:51.758857"], ["apikey", "7086018b26e3b7965f5c63fdaede911f"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 18], ["created_at", "2016-06-09 10:43:51.760830"], ["updated_at", "2016-06-09 10:43:51.760830"], ["apikey", "86eebfbf0e4e9592de39704bb6ac89f3"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 18], ["created_at", "2016-06-09 10:43:51.763319"], ["updated_at", "2016-06-09 10:43:51.763319"], ["apikey", "e740422f6a0d6e3fd15f4d271667ab5e"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 19], ["created_at", "2016-06-09 10:43:51.765339"], ["updated_at", "2016-06-09 10:43:51.765339"], ["apikey", "cfa4e6a04925a84bfec74de6cd525068"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 19], ["created_at", "2016-06-09 10:43:51.767286"], ["updated_at", "2016-06-09 10:43:51.767286"], ["apikey", "6689649322f49acc69bd31c567c5e7cf"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 19], ["created_at", "2016-06-09 10:43:51.769274"], ["updated_at", "2016-06-09 10:43:51.769274"], ["apikey", "533a9b95c0352913778da3f69d84f38e"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 19], ["created_at", "2016-06-09 10:43:51.771279"], ["updated_at", "2016-06-09 10:43:51.771279"], ["apikey", "10f3a15c735a46fd1308e613112f95b2"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 19], ["created_at", "2016-06-09 10:43:51.773333"], ["updated_at", "2016-06-09 10:43:51.773333"], ["apikey", "54d9d5f93abb697b4d451ea9af6a5e37"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 19], ["created_at", "2016-06-09 10:43:51.775385"], ["updated_at", "2016-06-09 10:43:51.775385"], ["apikey", "85e47efb61aa89a5b3714d0cd4ca0239"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 19], ["created_at", "2016-06-09 10:43:51.777379"], ["updated_at", "2016-06-09 10:43:51.777379"], ["apikey", "3445e2b68c986658de4a14ad13f53eac"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 19], ["created_at", "2016-06-09 10:43:51.779338"], ["updated_at", "2016-06-09 10:43:51.779338"], ["apikey", "824474f55b4f86dfca53eafd8b6586cd"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 19], ["created_at", "2016-06-09 10:43:51.781279"], ["updated_at", "2016-06-09 10:43:51.781279"], ["apikey", "d69cb17a83d93377c550833a6a2ec0f4"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 19], ["created_at", "2016-06-09 10:43:51.783347"], ["updated_at", "2016-06-09 10:43:51.783347"], ["apikey", "97843e464630d13a73630c3d20182597"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 20], ["created_at", "2016-06-09 10:43:51.785534"], ["updated_at", "2016-06-09 10:43:51.785534"], ["apikey", "73c6f5acd155a3937aa092a48bc11175"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 20], ["created_at", "2016-06-09 10:43:51.787547"], ["updated_at", "2016-06-09 10:43:51.787547"], ["apikey", "816cf7bb96ee5efdadd0e1f53c5e8834"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 20], ["created_at", "2016-06-09 10:43:51.789490"], ["updated_at", "2016-06-09 10:43:51.789490"], ["apikey", "a2a4cc33157a89524a1269b03c48ac38"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 20], ["created_at", "2016-06-09 10:43:51.791432"], ["updated_at", "2016-06-09 10:43:51.791432"], ["apikey", "e1293f407f4de4384431bdb903895e7e"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 20], ["created_at", "2016-06-09 10:43:51.793268"], ["updated_at", "2016-06-09 10:43:51.793268"], ["apikey", "32785479b953a08ebda4bdecb142366e"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 20], ["created_at", "2016-06-09 10:43:51.795194"], ["updated_at", "2016-06-09 10:43:51.795194"], ["apikey", "502191dff604466777287f89ec2ac384"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 20], ["created_at", "2016-06-09 10:43:51.797196"], ["updated_at", "2016-06-09 10:43:51.797196"], ["apikey", "62df2f13e4262db24dbc0c0a826a1ec1"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 20], ["created_at", "2016-06-09 10:43:51.799108"], ["updated_at", "2016-06-09 10:43:51.799108"], ["apikey", "05956c7427ae39416b923fe88d5f3057"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 20], ["created_at", "2016-06-09 10:43:51.801270"], ["updated_at", "2016-06-09 10:43:51.801270"], ["apikey", "8852d9fa6d455a28875fec9a20417746"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 20], ["created_at", "2016-06-09 10:43:51.803304"], ["updated_at", "2016-06-09 10:43:51.803304"], ["apikey", "408047a322f441c04b59752d326381fa"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 21], ["created_at", "2016-06-09 10:43:51.805494"], ["updated_at", "2016-06-09 10:43:51.805494"], ["apikey", "5b8c51a952ef622896fd4fa392bd3294"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 21], ["created_at", "2016-06-09 10:43:51.807450"], ["updated_at", "2016-06-09 10:43:51.807450"], ["apikey", "5246d0b4bb911c2a0864e03dde2b70f4"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 21], ["created_at", "2016-06-09 10:43:51.809472"], ["updated_at", "2016-06-09 10:43:51.809472"], ["apikey", "b4c02ee2c5c44db3ecdd839229e52298"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 21], ["created_at", "2016-06-09 10:43:51.811518"], ["updated_at", "2016-06-09 10:43:51.811518"], ["apikey", "66620275b9404e61b3b5c87c1d6e026e"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 21], ["created_at", "2016-06-09 10:43:51.813539"], ["updated_at", "2016-06-09 10:43:51.813539"], ["apikey", "f05e2045e0c5af1bf5a50061e17646bb"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 21], ["created_at", "2016-06-09 10:43:51.815370"], ["updated_at", "2016-06-09 10:43:51.815370"], ["apikey", "0a0ea47b7d9ddda0b9f001f3b9cd8e50"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 21], ["created_at", "2016-06-09 10:43:51.817479"], ["updated_at", "2016-06-09 10:43:51.817479"], ["apikey", "676cb79a22d2cd5bc754c093dac38ca7"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 21], ["created_at", "2016-06-09 10:43:51.819505"], ["updated_at", "2016-06-09 10:43:51.819505"], ["apikey", "d36aa320f140362dc4dc55787d530481"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 21], ["created_at", "2016-06-09 10:43:51.821528"], ["updated_at", "2016-06-09 10:43:51.821528"], ["apikey", "883cbc0e140866d44d7ce384e8f7ca0c"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 21], ["created_at", "2016-06-09 10:43:51.823455"], ["updated_at", "2016-06-09 10:43:51.823455"], ["apikey", "047f257e8f5429605073ba85e5d74932"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 22], ["created_at", "2016-06-09 10:43:51.825569"], ["updated_at", "2016-06-09 10:43:51.825569"], ["apikey", "21a19fff94f7f2cbd04c39ae54beec33"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 22], ["created_at", "2016-06-09 10:43:51.827615"], ["updated_at", "2016-06-09 10:43:51.827615"], ["apikey", "fcd92cf1f767ae46b84de9dfd6617fa9"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 22], ["created_at", "2016-06-09 10:43:51.829637"], ["updated_at", "2016-06-09 10:43:51.829637"], ["apikey", "904bceab82867e47370a7d1398af6c86"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 22], ["created_at", "2016-06-09 10:43:51.831581"], ["updated_at", "2016-06-09 10:43:51.831581"], ["apikey", "2824007ec2da35d2077497bece2174d1"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 22], ["created_at", "2016-06-09 10:43:51.833563"], ["updated_at", "2016-06-09 10:43:51.833563"], ["apikey", "96b4662f8a3913c8d2ac5db8aae9a23a"]]
+  [1m[36m (3.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 22], ["created_at", "2016-06-09 10:43:51.838906"], ["updated_at", "2016-06-09 10:43:51.838906"], ["apikey", "0108693315c5c41a41e052ca84456375"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 22], ["created_at", "2016-06-09 10:43:51.841241"], ["updated_at", "2016-06-09 10:43:51.841241"], ["apikey", "21223140f5615f24bef7fb47238ec7e4"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 22], ["created_at", "2016-06-09 10:43:51.843152"], ["updated_at", "2016-06-09 10:43:51.843152"], ["apikey", "559933fda4bfb0fb291506954d9b918b"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 22], ["created_at", "2016-06-09 10:43:51.845149"], ["updated_at", "2016-06-09 10:43:51.845149"], ["apikey", "e1dee2be87917ec249fdb115fc55a814"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 22], ["created_at", "2016-06-09 10:43:51.847140"], ["updated_at", "2016-06-09 10:43:51.847140"], ["apikey", "26b8c2690ef50a5108121736c1fea72a"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 23], ["created_at", "2016-06-09 10:43:51.849054"], ["updated_at", "2016-06-09 10:43:51.849054"], ["apikey", "87aa46763710d5541baf763983e89fc2"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 23], ["created_at", "2016-06-09 10:43:51.851224"], ["updated_at", "2016-06-09 10:43:51.851224"], ["apikey", "758462a71a4ace68ac7d9622ef9ee57f"]]
+  [1m[35m (16.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 23], ["created_at", "2016-06-09 10:43:51.869390"], ["updated_at", "2016-06-09 10:43:51.869390"], ["apikey", "705cdfe6c3e7b3b818972d8338422051"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 23], ["created_at", "2016-06-09 10:43:51.872678"], ["updated_at", "2016-06-09 10:43:51.872678"], ["apikey", "516add5c7b41fabf2d6be363253c4192"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 23], ["created_at", "2016-06-09 10:43:51.875257"], ["updated_at", "2016-06-09 10:43:51.875257"], ["apikey", "6b27bdc51695f2fd36c1d7573bf8e969"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 23], ["created_at", "2016-06-09 10:43:51.877712"], ["updated_at", "2016-06-09 10:43:51.877712"], ["apikey", "2ed4cade118500fab676a09481a71351"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 23], ["created_at", "2016-06-09 10:43:51.880315"], ["updated_at", "2016-06-09 10:43:51.880315"], ["apikey", "e1d9c84cc8bda0002a0c03e25e33ba6c"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 23], ["created_at", "2016-06-09 10:43:51.882833"], ["updated_at", "2016-06-09 10:43:51.882833"], ["apikey", "a7859d36ad249df7e8d92913d7457170"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 23], ["created_at", "2016-06-09 10:43:51.884947"], ["updated_at", "2016-06-09 10:43:51.884947"], ["apikey", "22fc7b4fee101bac041264acd6c8ccf3"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 23], ["created_at", "2016-06-09 10:43:51.887196"], ["updated_at", "2016-06-09 10:43:51.887196"], ["apikey", "e8ea1b8490bf50615dbece50ea945b24"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 24], ["created_at", "2016-06-09 10:43:51.889300"], ["updated_at", "2016-06-09 10:43:51.889300"], ["apikey", "bebea27463d07e4130460877a44bdcba"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 24], ["created_at", "2016-06-09 10:43:51.891531"], ["updated_at", "2016-06-09 10:43:51.891531"], ["apikey", "adba2c032596bdd7e56e1d1f0d242da0"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 24], ["created_at", "2016-06-09 10:43:51.893738"], ["updated_at", "2016-06-09 10:43:51.893738"], ["apikey", "dc4c17adda20902308b6f5f04cd00c4f"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 24], ["created_at", "2016-06-09 10:43:51.895883"], ["updated_at", "2016-06-09 10:43:51.895883"], ["apikey", "d2b367c32da58789631573ce04066c99"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 24], ["created_at", "2016-06-09 10:43:51.897834"], ["updated_at", "2016-06-09 10:43:51.897834"], ["apikey", "868d8efac6a5d56e8b0b323c20b0b810"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 24], ["created_at", "2016-06-09 10:43:51.899812"], ["updated_at", "2016-06-09 10:43:51.899812"], ["apikey", "ae657c7e9804dc004140fd2773d72fb5"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 24], ["created_at", "2016-06-09 10:43:51.901869"], ["updated_at", "2016-06-09 10:43:51.901869"], ["apikey", "bb5407dd5f51db79368b20342bf4ad79"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 24], ["created_at", "2016-06-09 10:43:51.903902"], ["updated_at", "2016-06-09 10:43:51.903902"], ["apikey", "0d8f82a9fbac3dcbc4376847929868cc"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 24], ["created_at", "2016-06-09 10:43:51.905835"], ["updated_at", "2016-06-09 10:43:51.905835"], ["apikey", "0eeca19281a25b087def57e3cd9574b7"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 24], ["created_at", "2016-06-09 10:43:51.907697"], ["updated_at", "2016-06-09 10:43:51.907697"], ["apikey", "1b7bc42e0fbeb4b60a8a2ec7e7452546"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 25], ["created_at", "2016-06-09 10:43:51.909712"], ["updated_at", "2016-06-09 10:43:51.909712"], ["apikey", "ad1cb1912a33c812f505b759dbe587cf"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 25], ["created_at", "2016-06-09 10:43:51.911727"], ["updated_at", "2016-06-09 10:43:51.911727"], ["apikey", "c901151047b78e0654bcb797cf19f261"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 25], ["created_at", "2016-06-09 10:43:51.913775"], ["updated_at", "2016-06-09 10:43:51.913775"], ["apikey", "daa2590d20798e0c39710772eff945f5"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 25], ["created_at", "2016-06-09 10:43:51.915843"], ["updated_at", "2016-06-09 10:43:51.915843"], ["apikey", "651ac13aeda31ebb8d481d6d8b6a7f68"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 25], ["created_at", "2016-06-09 10:43:51.917814"], ["updated_at", "2016-06-09 10:43:51.917814"], ["apikey", "674d6c66a8ec7517c2a549b43a7e3b60"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 25], ["created_at", "2016-06-09 10:43:51.919816"], ["updated_at", "2016-06-09 10:43:51.919816"], ["apikey", "c365def7d3e71b5baeeb5ee1d59ce57d"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 25], ["created_at", "2016-06-09 10:43:51.921807"], ["updated_at", "2016-06-09 10:43:51.921807"], ["apikey", "9eaba1cad84bf062274b126a0a683a34"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 25], ["created_at", "2016-06-09 10:43:51.923868"], ["updated_at", "2016-06-09 10:43:51.923868"], ["apikey", "523ae739f6e3152fc44ea722b68a9de6"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 25], ["created_at", "2016-06-09 10:43:51.925977"], ["updated_at", "2016-06-09 10:43:51.925977"], ["apikey", "f146ec5c9eb2eaba213088ef4d69193d"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 25], ["created_at", "2016-06-09 10:43:51.927975"], ["updated_at", "2016-06-09 10:43:51.927975"], ["apikey", "61ed1feb1544f86fd3f853075d97af1e"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp1"], ["user_id", 26], ["created_at", "2016-06-09 10:43:51.929922"], ["updated_at", "2016-06-09 10:43:51.929922"], ["apikey", "6f3f29888ff394cc75242fd9ea5d703a"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp2"], ["user_id", 26], ["created_at", "2016-06-09 10:43:51.931919"], ["updated_at", "2016-06-09 10:43:51.931919"], ["apikey", "968fdbd60fbe6af0e2c3f1ff34cfcb5e"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp3"], ["user_id", 26], ["created_at", "2016-06-09 10:43:51.934136"], ["updated_at", "2016-06-09 10:43:51.934136"], ["apikey", "07d44752488f7b2b60579a5217762c55"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp4"], ["user_id", 26], ["created_at", "2016-06-09 10:43:51.936237"], ["updated_at", "2016-06-09 10:43:51.936237"], ["apikey", "c5f5cc29ba318a0084f37e65b6ea8882"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp5"], ["user_id", 26], ["created_at", "2016-06-09 10:43:51.938200"], ["updated_at", "2016-06-09 10:43:51.938200"], ["apikey", "f1344d52df05ff4244eb2d018cbb6de3"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp6"], ["user_id", 26], ["created_at", "2016-06-09 10:43:51.940162"], ["updated_at", "2016-06-09 10:43:51.940162"], ["apikey", "420601e1159755210c31e6984247721c"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp7"], ["user_id", 26], ["created_at", "2016-06-09 10:43:51.942094"], ["updated_at", "2016-06-09 10:43:51.942094"], ["apikey", "b8266b88ef9599e7cc5e5a8339336ef2"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp8"], ["user_id", 26], ["created_at", "2016-06-09 10:43:51.944129"], ["updated_at", "2016-06-09 10:43:51.944129"], ["apikey", "67f4ef63a40daa40ce8195c475346747"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)  [["content", "ExampleApp9"], ["user_id", 26], ["created_at", "2016-06-09 10:43:51.946207"], ["updated_at", "2016-06-09 10:43:51.946207"], ["apikey", "bc7625856bf3d5f13e6c1a0454c7b57e"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "appregistrations" ("content", "user_id", "created_at", "updated_at", "apikey") VALUES (?, ?, ?, ?, ?)[0m  [["content", "ExampleApp10"], ["user_id", 26], ["created_at", "2016-06-09 10:43:51.948198"], ["updated_at", "2016-06-09 10:43:51.948198"], ["apikey", "7fd0eb697dd731ba9b28ea67fa82736a"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mPosition Exists (0.2ms)[0m  SELECT  1 AS one FROM "positions" WHERE "positions"."address" = 'Södra Kanalgatan, 392 31 Kalmar, Sweden' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "positions" ("latitude", "longitude", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["latitude", 56.6666667], ["longitude", 16.3666667], ["address", "Södra Kanalgatan, 392 31 Kalmar, Sweden"], ["created_at", "2016-06-09 10:43:52.532717"], ["updated_at", "2016-06-09 10:43:52.532717"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPosition Exists (0.2ms)[0m  SELECT  1 AS one FROM "positions" WHERE "positions"."address" = 'Wernskjöldsgatan 17, 392 35 Kalmar, Sweden' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "positions" ("latitude", "longitude", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["latitude", 56.668213], ["longitude", 16.356047], ["address", "Wernskjöldsgatan 17, 392 35 Kalmar, Sweden"], ["created_at", "2016-06-09 10:43:52.649080"], ["updated_at", "2016-06-09 10:43:52.649080"]]
+  [1m[35m (2.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPosition Exists (0.2ms)[0m  SELECT  1 AS one FROM "positions" WHERE "positions"."address" = 'Tegelviksvägen 4, 392 43 Kalmar, Sweden' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "positions" ("latitude", "longitude", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["latitude", 56.6651], ["longitude", 16.319741], ["address", "Tegelviksvägen 4, 392 43 Kalmar, Sweden"], ["created_at", "2016-06-09 10:43:52.742919"], ["updated_at", "2016-06-09 10:43:52.742919"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "tags" ("name", "created_at", "updated_at") VALUES (?, ?, ?)  [["name", "Fun"], ["created_at", "2016-06-09 10:43:52.755481"], ["updated_at", "2016-06-09 10:43:52.755481"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tags" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Great"], ["created_at", "2016-06-09 10:43:52.757846"], ["updated_at", "2016-06-09 10:43:52.757846"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tags" ("name", "created_at", "updated_at") VALUES (?, ?, ?)  [["name", "Meh"], ["created_at", "2016-06-09 10:43:52.759883"], ["updated_at", "2016-06-09 10:43:52.759883"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mCreator Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "creators" WHERE LOWER("creators"."email") = LOWER('wictor@gmail.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "creators" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Wicce"], ["email", "wictor@gmail.com"], ["password_digest", "$2a$10$snK5DLCWryHl6psq9RP8xuxGSfciPLjROcXxtTSAW4TMhBurWvXQO"], ["created_at", "2016-06-09 10:43:52.839270"], ["updated_at", "2016-06-09 10:43:52.839270"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mCreator Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "creators" WHERE LOWER("creators"."email") = LOWER('calle@gmail.com') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "creators" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Calle"], ["email", "calle@gmail.com"], ["password_digest", "$2a$10$jR3n4fEw1O32qs5b0ZSL0OE52LDl0fObKSk8337O33R4xGX6bHoCu"], ["created_at", "2016-06-09 10:43:52.915813"], ["updated_at", "2016-06-09 10:43:52.915813"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "events" ("category", "description", "creator_id", "position_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["category", "Paintball"], ["description", "Paintball desc"], ["creator_id", 1], ["position_id", 1], ["created_at", "2016-06-09 10:43:52.940662"], ["updated_at", "2016-06-09 10:43:52.940662"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("category", "description", "creator_id", "position_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["category", "Treasure hunt"], ["description", "Treasure desc"], ["creator_id", 1], ["position_id", 2], ["created_at", "2016-06-09 10:43:52.944168"], ["updated_at", "2016-06-09 10:43:52.944168"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "events" ("category", "description", "creator_id", "position_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["category", "Horse riding"], ["description", "Horse desc"], ["creator_id", 1], ["position_id", 3], ["created_at", "2016-06-09 10:43:52.947010"], ["updated_at", "2016-06-09 10:43:52.947010"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "events" ("category", "description", "creator_id", "position_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["category", "Surfing"], ["description", "Surf desc"], ["creator_id", 2], ["position_id", 1], ["created_at", "2016-06-09 10:43:52.949501"], ["updated_at", "2016-06-09 10:43:52.949501"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "events_tags" ("event_id", "tag_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["event_id", 1], ["tag_id", 1], ["created_at", "2016-06-09 10:43:52.970474"], ["updated_at", "2016-06-09 10:43:52.970474"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "events_tags" ("event_id", "tag_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["event_id", 1], ["tag_id", 2], ["created_at", "2016-06-09 10:43:52.973194"], ["updated_at", "2016-06-09 10:43:52.973194"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "events_tags" ("event_id", "tag_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["event_id", 1], ["tag_id", 3], ["created_at", "2016-06-09 10:43:52.975621"], ["updated_at", "2016-06-09 10:43:52.975621"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "events_tags" ("event_id", "tag_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["event_id", 2], ["tag_id", 1], ["created_at", "2016-06-09 10:43:52.978285"], ["updated_at", "2016-06-09 10:43:52.978285"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "events_tags" ("event_id", "tag_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["event_id", 3], ["tag_id", 2], ["created_at", "2016-06-09 10:43:52.980960"], ["updated_at", "2016-06-09 10:43:52.980960"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events_tags" ("event_id", "tag_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["event_id", 4], ["tag_id", 1], ["created_at", "2016-06-09 10:43:52.988189"], ["updated_at", "2016-06-09 10:43:52.988189"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/" for 127.0.0.1 at 2016-06-09 12:44:11 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StaticPagesController#home as HTML
+  Rendered static_pages/home.html.erb within layouts/application (2.0ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.2ms)
+Completed 200 OK in 384ms (Views: 370.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/v1/events" for 127.0.0.1 at 2016-06-09 12:44:15 +0200
+Processing by API::V1::EventsController#index as HTML
+  [1m[35mPosition Load (0.1ms)[0m  SELECT positions.*, NULL AS distance, NULL AS bearing FROM "positions" WHERE (0)
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "events"[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events"  ORDER BY "events"."created_at" DESC LIMIT 15 OFFSET 0
+[active_model_serializers]   [1m[36mCreator Load (0.1ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 2]]
+[active_model_serializers]   [1m[35mPosition Load (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mTag Load (0.2ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 4]]
+[active_model_serializers]   [1m[35mCreator Load (0.1ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mPosition Load (0.1ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 3]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 3]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mPosition Load (0.1ms)[0m  SELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1  [["id", 2]]
+[active_model_serializers]   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?[0m  [["event_id", 2]]
+[active_model_serializers]   [1m[35mCACHE (0.0ms)[0m  SELECT  "creators".* FROM "creators" WHERE "creators"."id" = ? LIMIT 1  [["id", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "events_tags" ON "tags"."id" = "events_tags"."tag_id" WHERE "events_tags"."event_id" = ?  [["event_id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (71.45ms)
+Completed 200 OK in 118ms (Views: 96.7ms | ActiveRecord: 2.3ms)
