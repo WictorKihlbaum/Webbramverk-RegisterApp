@@ -22,25 +22,25 @@ I have written down the essentials step-by-step from the guide above.
 
 1. Upgrade your Mac to OS X El Capitan (Can be found on AppStore).
 2. Install XCode (Can be found on AppStore).
-3. Install Homebrew by open terminal and type: 
+3. Install Homebrew by open terminal and type:  
  `$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)”`
-4. Install GPG. In terminal type:
+4. Install GPG. In terminal type:  
 `$ brew install gpg`
-5. Install the security key for RVM. In terminal type:
+5. Install the security key for RVM. In terminal type:  
 `$ command curl -sSL https://rvm.io/mpapis.asc | gpg --import -`
-6. Install RVM. In terminal type: 
+6. Install RVM. In terminal type:  
 `$ \curl -L https://get.rvm.io | bash -s stable`
-7. Close and reopen the Terminal, or type: 
+7. Close and reopen the Terminal, or type:  
 `$ source ~/.rvm/scripts/rvm`
-8. Install Ruby. In terminal type: 
+8. Install Ruby. In terminal type:  
 `$ rvm install ruby-2.3.1`
-9. Update gems. In terminal type: 
+9. Update gems. In terminal type:  
 `$ gem update`
-10. Install Bundler. In terminal type: 
+10. Install Bundler. In terminal type:  
 `$ gem install bundler`
-11. Install Nokogiri. In terminal type: 
+11. Install Nokogiri. In terminal type:  
 `$ gem install nokogiri`
-12. Install Rails. In terminal type: 
+12. Install Rails. In terminal type:   
 `$ gem install rails`
 
 **Application installation**
