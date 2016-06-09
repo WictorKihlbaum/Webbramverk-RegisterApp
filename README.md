@@ -56,6 +56,8 @@ I have written down the essentials step-by-step from the guide above.
 **12.** Install Rails. In terminal type:   
 `$ gem install rails`
 
+**Done! You should now be ready to download and run the application!**
+
 **Application installation**  
 **1.** Download the Zip-file and extract it.  
 **2.** Open the terminal on your computer.   
