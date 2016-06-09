@@ -22,10 +22,10 @@ class API::V1::PositionsController < API::APIController
     if position.save
       render_response(position, :created)
     else
-      oldPosition = Position.find_by_address(position.address)
+      old_position = Position.find_by_address(position.address)
 
-      if oldPosition
-        message = { message: ALREADY_EXIST, position: oldPosition }
+      if old_position
+        message = { message: ALREADY_EXIST, position: old_position }
         render_response(message, :ok)
       else
         error = { message: NOT_CREATED, errors: position.errors }
